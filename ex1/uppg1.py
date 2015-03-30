@@ -21,18 +21,28 @@ def bisec(f,a,b,tol):
     if f(a)*f(b) > 0:
         raise Exception("no root in interval")
 
+    err_list = []
+    guess_list = []
+
     for i in range(2000):
-        if abs(a-b) < tol:
-            return a, i
+        err_list.append(abs(a-b))
+        if err_list[i] < tol:
+            h = (a+b)/2
+            guess_list.append(h)
+            return h, i, err_list, guess_list
         else:
-            h= (a+b)/2
+            h = (a+b)/2
+            guess_list.append(h)
             if f(a)*f(h) <= 0:
-                b=h
+                b = h
             elif f(h)*f(b) <= 0:
-                a=h
+                a = h
             else:
-                raise Exception("no root in interval")
+                raise Exception("possibly multiple roots in interval")
+    else:
+        return xnp1, i, err_list, guess_list
 
-
-
-print(bisec(f,-4,0,0.001))
+res, it, err, guess = bisec(f,-4,0,0.001)
+print(res, it)
+plot(range(size(err)), err)
+plot(range(size(guess)), guess)
