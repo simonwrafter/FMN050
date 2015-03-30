@@ -24,7 +24,3 @@ def fpi(g, x, tol):
     else:
         return xnp1, i, err_list, guess_list
 
-res, it, err, guess = fpi(g,-10, 0.001)
-print(res, it)
-plot(range(size(err)), err)
-plot(range(size(guess)), guess)

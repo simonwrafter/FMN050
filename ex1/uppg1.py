@@ -41,8 +41,3 @@ def bisec(f,a,b,tol):
                 raise Exception("possibly multiple roots in interval")
     else:
         return xnp1, i, err_list, guess_list
-
-res, it, err, guess = bisec(f,-4,0,0.001)
-print(res, it)
-plot(range(size(err)), err)
-plot(range(size(guess)), guess)
