@@ -16,9 +16,12 @@ from uppg4 import secant
 def f(x):
     return x**2 - 2
 
+def g(x):
+    return x * (x**2 + 6)/(3 * x**2 + 2)
+
 tol = 1e-14
-x0 = 0
-x1 = 40
+x0 = 5
+x1 = 0.5
 
 res1, it1, err1, guess1 = bisec(f, x0, x1, tol)
 res2, it2, err2, guess2 = fpi(g, x1, tol)
