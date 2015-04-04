@@ -21,11 +21,11 @@ def g(x):
 
 tol = 1e-14
 x0 = 5
-x1 = 0.0
+x1 = 0
 
 res1, it1, err1, guess1 = bisec(f, x0, x1, tol)
-res2, it2, err2, guess2 = fpi(g, x1, tol)
-res3, it3, err3, guess3 = newton(f, x1, tol)
+res2, it2, err2, guess2 = fpi(g, x0, tol)
+res3, it3, err3, guess3 = newton(f, x0, tol)
 res4, it4, err4, guess4 = secant(f, x0, x1, tol)
 
 figure(1)
@@ -40,7 +40,7 @@ p14 = plot(range(size(guess4)), guess4, label='secant')
 xlabel('iterations')
 ylabel('guess')
 legend(shadow=True)
-axis([0,8,0.5,2.5])
+axis([0,10,0,5])
 
 figure(2)
 clf()
@@ -54,7 +54,7 @@ plot(range(size(err4)), err4, label='secant')
 xlabel('iterations')
 ylabel('error')
 legend(shadow=True)
-axis([0,8,-0.5,4.5])
+axis([0,8,0,5])
 
 print("bisec:  {}".format(it1))
 print("fpi:    {}".format(it2))

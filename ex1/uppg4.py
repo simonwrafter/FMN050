@@ -15,7 +15,10 @@ def new_sec(f, fp, xn, xnm1=0, xtol=1e-7):
     err_list = [nan]
     guess_list = [xn]
     for i in range(2000):
-        xnp1 = xn - f(xn)/fp(f,xn,xnm1)
+        deriv = fp(f,xn,xnm1)
+        if deriv == 0:
+            raise Exception("Derivative is zero at x={}".format(xn))
+        xnp1 = xn - f(xn)/deriv
         guess_list.append(xnp1)
         err_list.append(abs(xn-xnp1))
         if err_list[i] < xtol:
@@ -28,7 +31,7 @@ def new_sec(f, fp, xn, xnm1=0, xtol=1e-7):
 
 
 def newton(f,x0, tol):
-    eps = np.finfo(float).eps * 1000
+    eps = np.finfo(float).eps * 10000
     return new_sec(f, (lambda fl, x0l, x1l : ((fl(x0l + eps) - f(x0l))/eps)), x0, xtol=tol)
 
 def secant(f, x0, x1, tol):
