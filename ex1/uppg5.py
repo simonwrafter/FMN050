@@ -21,7 +21,7 @@ def g(x):
 
 tol = 1e-14
 x0 = 5
-x1 = 0.5
+x1 = 0.0
 
 res1, it1, err1, guess1 = bisec(f, x0, x1, tol)
 res2, it2, err2, guess2 = fpi(g, x1, tol)
