@@ -18,7 +18,7 @@ def plotter(fun, a, b):
 
 def bisec(f,a,b,tol):
 
-    if f(a)*f(b) > 0:
+    if f(a)*f(b) >= 0:
         raise Exception("no root in interval")
 
     err_list = []
@@ -33,11 +33,14 @@ def bisec(f,a,b,tol):
         else:
             h = (a+b)/2
             guess_list.append(h)
-            if f(a)*f(h) <= 0:
+            if f(h) == 0:
+                return h, i, err_list, guess_list
+            elif f(a)*f(h) < 0:
                 b = h
-            elif f(h)*f(b) <= 0:
+            elif f(h)*f(b) < 0:
                 a = h
             else:
-                raise Exception("possibly multiple roots in interval")
+                raise Exception("possibly multiple or no roots in interval")
     else:
         return xnp1, i, err_list, guess_list
+

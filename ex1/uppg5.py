@@ -54,7 +54,7 @@ plot(range(size(err4)), err4, label='secant')
 xlabel('iterations')
 ylabel('error')
 legend(shadow=True)
-axis([0,8,0,5])
+#axis([0,8,0,5])
 
 print("bisec:  {}".format(it1))
 print("fpi:    {}".format(it2))
