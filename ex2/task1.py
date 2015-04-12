@@ -21,20 +21,23 @@ def Jack(F, xa, xb):
 
     return array([[deriva[0], derivb[0]], [deriva[1], derivb[1]]])
 
-print(Jack(F, *ab0))
+def noninvert(J, F):
+    G = identity(2) - J
+    c = F
+    for i in
+
 
 def newton(F, x0, xtol = 1e-4):
     xn = x0
     for i in range(2000):
         J = Jack(F, *xn)
-        print(J)
-        print('\n')
-        xnp1 = xn - inv(J) * F(*xn)
-        if norm(xn-xnp1) < xtol:
+        xnp1 = xn - noninvert(J) * F(*xn)
+        if abs(norm(xn-xnp1)) < xtol:
             return xnp1, i, err_list, guess_list
         else:
             xn = xnp1
     else:
         return xnp1, i, err_list, guess_list
+
 
 print(newton(F, ab0))
