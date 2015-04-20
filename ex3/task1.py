@@ -11,6 +11,7 @@ from  pylab import *
 
 day    = array([ 7.,    8.,    9.,   10.,   11.])
 energy = array([27.93, 46.98, 31.95, 31.68, 21.])
+enEdit = energy + array([0., 0., 0., -0.01, 0.])
 
 dayExtreme = linspace(min(day), max(day)+4, 1000)
 
@@ -54,7 +55,15 @@ def interpol(x, xm, ym):
         prod += ym[i]*L(x, xm, i)
     return prod
 
+lagY = [interpol(i, day, energy) for i in dayExtreme]
 
+plot(dayExtreme, lagY, 'g')
+plot(day, energy, '*g')
 
-plot(dayExtreme, [interpol(i, day, energy) for i in dayExtreme])
-plot(day, energy, '*')
+lagYedit = [interpol(i, day, enEdit) for i in dayExtreme]
+
+plot(dayExtreme, lagYedit, 'r')
+plot(day, enEdit, '*r')
+
+index = 3
+print(abs((abs(energy[index] - enEdit[index])/max(energy[index], enEdit[index])) / (abs(lagY[-1] - lagYedit[-1])/max(lagY[-1], lagYedit[-1]))))
