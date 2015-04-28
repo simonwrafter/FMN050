@@ -80,7 +80,7 @@ yval = []
 xplot = array(linspace(0, x[-1], 200))
 for i in range(len(xplot)):
     yval.append(cubsplineval(coeff, x, xplot[i]))
-
+yval[-1] = y[-1]
 figure(1)
 clf()
 grid(1)

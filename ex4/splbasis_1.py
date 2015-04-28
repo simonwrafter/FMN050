@@ -77,6 +77,7 @@ yval = []
 xplot = array(linspace(0, x[-1], 200))
 for i in range(len(xplot)):
     yval.append(cubsplineval(coeff, x, xplot[i]))
+yval[-1] = y[-1]
 
 
 def Bsplbasis(xi,di,dx):
@@ -128,12 +129,12 @@ def Bsplbasis(xi,di,dx):
 x = [0, 1,  2, 3, 4, 5, 6]
 y = [1, 3, -2, 0, 1, 0, 1]
 
-xi = [0,0,0,0, 1, 2, 3, 4, 5, 6,6,6,6]
+xi = [0,   0,   0,    0, 1, 2, 3, 4, 5, 6,6,6,6]
 yi = [1, 2.5, 5.3, -4.5, 0.8, 1.4, -0.55, 0.4, 1] # d
 dx = 0.01
 
 yb = Bsplbasis(xi,yi,dx)
-xb = linspace(x[0], x[-1], len(q))
+xb = linspace(x[0], x[-1], len(yb))
 
 figure(1)
 clf()
