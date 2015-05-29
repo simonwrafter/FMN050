@@ -8,12 +8,20 @@ from  scipy import *
 from  pylab import *
 
 def exp_euler(f, w_0, t_0, t_stop, h):
-    w = list([w_0])
+    w = w_0
+    x  = list([w_0[0]])
+    xp = list([w_0[1]])
+    y  = list([w_0[2]])
+    yp = list([w_0[3]])
     t = list([t_0])
     while t[-1] < t_stop:
-        w.append(w[-1] + h*f(t, w[-1]))
+        w = w + h*f(t[-1], w)
+        x.append(w[0])
+        xp.append(w[1])
+        y.append(w[2])
+        yp.append(w[3])
         t.append(t[-1] + h)
-    return t, w
+    return t, x, xp, y, yp
 
 def imp_euler(f, u_0, t_0, t_stop, h):
     u = u_0
@@ -52,8 +60,22 @@ def f(t, y):
     return dot(A, y)
 
 
-to, xo, xpo, yo, ypo = imp_euler(f, array([0.0,1.,2.0,0.0]), 0, 20.0, 0.001)
+to, xo, xpo, yo, ypo = exp_euler(f, array([0.0,1.,2.0,0.0]), 0, 100, 0.01)
 figure(1)
 clf()
 grid(1)
-plot(xo, yo)
+#axis([-0.1, 0.1, 1.9, 2.1])
+title('Explicit Euler, h=0.0001')
+plot(xo, yo, label='satelite')
+plot(0,0,'o',label='planet')
+legend()
+
+to, xo, xpo, yo, ypo = imp_euler(f, array([0.0,1.,2.0,0.0]), 0, 100, 0.01)
+figure(2)
+clf()
+grid(1)
+#axis([-0.1, 0.1, 1.9, 2.1])
+title('Implicit Euler, h=0.0001')
+plot(xo, yo, label='satelite')
+plot(0,0,'o',label='planet')
+legend()

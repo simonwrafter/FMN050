@@ -35,6 +35,10 @@ def f(t, y):
 #print("\nimplicit euler, h = 0.000001: ")
 #print(imp_euler(f, 1.0, 0.0, 2.0, 0.000001))
 
-#to, wo = imp_euler(f, 1.0, 0.0, 2.0, 0.10001)
+to, wo = imp_euler(f, 1.0, 0.0, 2.0, 0.1)
 
-#plot(to,wo)
+figure(1)
+clf()
+grid(1)
+plot(linspace(0.0, 2.0, 200), exp(10.0*linspace(0.0, 2.0, 200)), 'k')
+plot(to,wo)

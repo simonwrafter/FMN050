@@ -6,12 +6,6 @@ Created on Tue May 12 10:51:45 2015
 from  scipy import *
 from  pylab import *
 
-def drange(start, stop, step):
-    r = start
-    while r < stop:
-        yield r
-        r += step
-
 def f(a):
     return -a**5 + 2.0*a**2-15.0*a+32.0
     
@@ -30,12 +24,12 @@ for n in npoints:
     h = (b-a)/n
     #simpson
     sum = f(a) + 4*f(a+h/2) + f(b)
-    for i in drange(a,b,h):
+    for i in linspace(a,b,h):
         sum += 2*f(i) + 4*(f(i+h/2)) 
         
     sum *= h/6
     error = 0
-    for i in drange(a,b,h):
+    for i in linspace(a,b,h):
         temp = f(i)**4
         if temp > error:
             error = temp
@@ -49,7 +43,7 @@ for n in npoints:
     
     #3 point gauss
     sum = 0
-    for i in drange(a,b,h):
+    for i in linspace(a,b,h):
         sum += 5*f(i + (5-sqrt(15))*h/10) + 8*f(i+5*h/10) + 5*f(i+((5+sqrt(15))*h/10))
     
     sum *=h/18
